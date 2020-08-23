@@ -21,7 +21,7 @@ public class Wish extends PanacheEntity {
     public String url;
     public Integer priority;
 
-    // Data handling methods
+    // Panache helper methods
 
     /**
      * Finds a wish by wishId.

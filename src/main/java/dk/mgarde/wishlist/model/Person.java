@@ -19,6 +19,9 @@ import io.quarkus.panache.common.Parameters;
 import io.quarkus.panache.common.Sort;
 import lombok.Data;
 
+/**
+ * Person data and {@link Entity} definition.
+ */
 @Entity
 @Data
 public class Person extends PanacheEntity {
@@ -48,7 +51,7 @@ public class Person extends PanacheEntity {
 
     }
 
-    // Helper methods
+    // Panache helper methods
 
     /**
      * Finds a {@link Person} based a personId
