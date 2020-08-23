@@ -93,8 +93,6 @@ docker-compose up
 * Better date handling of birthdays in the Person class.
 * Better Swagger documentation.
 * Frontend?
-* FIX
-  * Tests not running properly on ```mvn package``` due to postgres issue.
 
 ### Docker stuff
 
