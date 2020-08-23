@@ -72,6 +72,12 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.12</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -93,7 +99,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${compiler-plugin.version}</version>
       </plugin>
-      <plugin>
+<!--       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
         <configuration>
@@ -102,7 +108,7 @@
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
         </configuration>
-      </plugin>
+      </plugin> -->
     </plugins>
   </build>
   <profiles>
@@ -115,7 +121,7 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
+<!--           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>${surefire-plugin.version}</version>
             <executions>
@@ -133,7 +139,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>
+          </plugin> -->
         </plugins>
       </build>
       <properties>

@@ -7,6 +7,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
+
 ```
 ./mvnw quarkus:dev
 ```
@@ -28,3 +29,29 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/kit-kodeopgave-v3-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
+
+## Prerequisites
+
+### Run postgres
+
+This service needs a PostgreSQL database.
+See [/src/main/resources/application.properties](/src/main/resources/application.properties) for configuration details.
+
+```bash
+docker pull postgres
+docker run --name kit-postgres -e POSTGRES_PASSWORD=1234 -d -p 5432:5432 postgres
+docker start kit-postgres
+```
+
+### Interesting endpoints
+
+* [Rest resources](http://localhost:8080/)
+* [swagger-ui](http://localhost:8080/swagger-ui/)
+* [health](http://localhost:8080/health)
+* [metrics](http://localhost:8080/metrics)
+
+## TODO
+
+* Better date handling of birthdays in the Person class.
+* Better Swagger documentation.
+* Frontend?
