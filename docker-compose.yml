@@ -1,0 +1,70 @@
+# This is for demonstration purposes, and is not used in production
+version: '3.8'
+services:
+
+  postgres-db:
+    container_name: postgres-db
+    image: postgres
+    environment: 
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1s
+      timeout: 30s
+      retries: 10
+
+  wishlist-api:
+    container_name: wishlist-api
+    build: 
+      context: .
+      dockerfile: src/main/docker/Dockerfile.jvm
+      args:
+        tag: quarkus/kit-kodeopgave-v3-jvm
+    environment:
+      QUARKUS_LOG_LEVEL: DEBUG
+      QUARKUS_DATASOURCE_USERNAME: postgres
+      QUARKUS_DATASOURCE_PASSWORD: 1234
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres-db:5432/postgres
+    ports:
+    - "8080:8080"
+    depends_on: 
+      - postgres-db
+
+# Monitoring
+  postgres-exporter:
+    container_name: postgres_exporter
+    image: wrouesnel/postgres_exporter
+    environment: 
+      DATA_SOURCE_NAME: postgresql://postgres:1234@postgres-db:5432/postgres?sslmode=disable
+    ports:
+      - 9187:9187
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    expose:
+      - 9090
+    ports:
+      - 9090:9090
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: monitoring_grafana
+    restart: unless-stopped
+    links:
+      - prometheus:prometheus
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=1234
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_DOMAIN=localhost
+    ports:
+      - 3000:3000

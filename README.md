@@ -30,7 +30,7 @@ You can then execute your native executable with: `./target/kit-kodeopgave-v3-1.
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
 
-## Prerequisites
+## Development prerequisites
 
 ### Run postgres
 
@@ -43,6 +43,42 @@ docker run --name kit-postgres -e POSTGRES_PASSWORD=1234 -d -p 5432:5432 postgre
 docker start kit-postgres
 ```
 
+Run
+
+```bash
+mvn quarkus:dev
+```
+
+## Build and create a docker image (on Windows)
+
+Create package
+
+```powershell
+.\mvnw package -DskipTests
+```
+
+Build the docker image (remember the dot at the end.)
+
+```powershell
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/kit-kodeopgave-v3-jvm .
+```
+
+## Using Docker compose
+
+
+Create package
+
+```powershell
+.\mvnw clean package -DskipTests
+```
+
+Run
+
+```powershell
+docker-compose build
+docker-compose up
+```
+
 ### Interesting endpoints
 
 * [Rest resources](http://localhost:8080/)
@@ -52,6 +88,15 @@ docker start kit-postgres
 
 ## TODO
 
+### Code
+
 * Better date handling of birthdays in the Person class.
 * Better Swagger documentation.
 * Frontend?
+* FIX
+  * Tests not running properly on ```mvn package``` due to postgres issue.
+
+### Docker stuff
+
+* google/cadvisor
+* Improved grafana dashboard

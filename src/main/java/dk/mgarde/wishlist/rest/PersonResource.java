@@ -49,7 +49,7 @@ public class PersonResource {
      * the query parameter 'personId'
      */
     @GET
-    @Path("/search")
+    @Path("/find")
     public Person getPersonById(@QueryParam("personId") long personId) {
         log.info("Getting person by personId " + personId);
         try {

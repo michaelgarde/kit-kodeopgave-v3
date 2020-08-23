@@ -20,4 +20,9 @@ public class RestResponse {
         setMessage(message);
     }
 
+    public RestResponse(Status status, Exception e) {
+        setStatus(status);
+        setMessage(e.getClass().getName() + ": " + e.getLocalizedMessage());
+    }
+
 }

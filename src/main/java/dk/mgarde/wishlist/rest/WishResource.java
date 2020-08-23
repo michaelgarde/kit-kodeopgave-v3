@@ -53,9 +53,8 @@ public class WishResource {
             return new RestResponse(Status.SUCCESS, "Wish added.");
         } catch (Exception e) {
             throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new RestResponse(RestResponse.Status.FAILED, e.getMessage())).build());
+                    .entity(new RestResponse(RestResponse.Status.FAILED, e)).build());
         }
-
     }
 
     /**
@@ -67,8 +66,8 @@ public class WishResource {
             Wish.deleteWish(wishId);
             return new RestResponse(Status.SUCCESS, "Wish deleted");
         } catch (Exception e) {
-            return new RestResponse(Status.FAILED, e.getMessage());
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity(new RestResponse(RestResponse.Status.FAILED, e)).build());
         }
     }
-
 }
