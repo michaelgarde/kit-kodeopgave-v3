@@ -28,7 +28,7 @@ public class Person extends PanacheEntity {
 
     public String name;
     public LocalDate birthday;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "person_id")
     public List<Wish> wishList;

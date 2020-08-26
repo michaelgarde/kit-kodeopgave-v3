@@ -65,7 +65,6 @@ docker build -f src/main/docker/Dockerfile.jvm -t quarkus/kit-kodeopgave-v3-jvm 
 
 ## Using Docker compose
 
-
 Create package
 
 ```powershell
